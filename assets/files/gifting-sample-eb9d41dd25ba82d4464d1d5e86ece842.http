@@ -1,0 +1,63 @@
+ ###
+@host = https://api.fourthwall.com
+@authToken = Basic <auth token for shop creator>
+@openApiUserAuth = Basic <auth token for open api user>
+@origin = https://<<your shop>>.fourthwall.com/
+
+# params specific for single giveaway
+
+# take it from gift draw started webhook
+@drawId = gdr_WuDpQVOYQUi9K7wemDIcow
+
+# twitch login - will be eligible to redeem gift after running finish gift draw endpoint
+@twitchWinnerUserId = 111111111
+@twitchWinnerUserName = test
+
+### Stream start
+PUT https://{{host}}/open-api/v1.0/streaming/start
+Authorization: {{openApiUserAuth}}
+Content-Type: application/json
+
+{
+  "services": [
+    {
+      "type": "TWITCH",
+      "broadcasterId": "test-broadcaster-id",
+      "broadcasterLogin": "raziosx",
+      "thumbnailUrl": "test-thumbnail-url"
+    }
+  ]
+}
+
+### Stream end
+PUT https://{{host}}/open-api/v1.0/streaming/end
+Authorization: {{openApiUserAuth}}
+Content-Type: application/json
+
+{
+  "services": [
+    "TWITCH"
+  ]
+}
+
+### Stream status
+GET https://{{host}}/open-api/v1.0/streaming
+Authorization: {{openApiUserAuth}}
+
+### Get Gift Draw
+GET https://{{host}}/open-api/v1.0/gifting/draw/{{drawId}}
+
+### Finish Gift Draw (execute GET first to get drawId)
+PUT https://{{host}}/open-api/v1.0/gifting/draw/{{drawId}}/finish
+Authorization: {{openApiUserAuth}}
+Content-Type: application/json
+
+{
+  "participants": [
+    {
+      "service": "TWITCH",
+      "userId": "{{twitchWinnerUserId}}",
+      "userName": "{{twitchWinnerUserName}}"
+    }
+  ]
+}
