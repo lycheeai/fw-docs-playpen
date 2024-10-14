@@ -2,30 +2,9 @@ openapi: 3.0.1
 info:
   title: Storefront APIs
   version: v1.0
-  description: >
-    # How to get credentials?
-
-
-    We are excited to offer you access to our Open API, allowing you to
-    integrate our services seamlessly with your applications.
-
-
-    However, kindly note that the creation of API credentials is reserved for
-    users with the **SUPER ADMIN** role for security reasons.
-
-
-    To obtain the required credentials, please follow these steps:
-
-    1. Log in to your shop dashboard with your SUPER ADMIN account.
-
-    2. In the left panel, navigate to the "Settings" section.
-
-    3. Click on the "For Developers" tab.
-
-
-    **Creating API User**
+  description: ''
 servers:
-  - url: https://api.fourthwall.com
+  - url: https://storefront-api.fourthwall.com
     description: Generated server url
 paths:
   /api/public/v1.0/products/{slug}:
